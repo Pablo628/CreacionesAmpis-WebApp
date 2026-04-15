@@ -15,9 +15,6 @@ public static class ApplicationServiceCollectionExtensions
         services.AddScoped<IProductQueries, ProductQueries>();
         services.AddScoped<ICategoryCommands, CategoryCommands>();
         services.AddScoped<ICategoryQueries, CategoryQueries>();
-        // Luego agregas Category cuando lo crees:
-        // services.AddScoped<ICategoryCommands, CategoryCommands>();
-        // services.AddScoped<ICategoryQueries, CategoryQueries>();
 
         return services;
     }
