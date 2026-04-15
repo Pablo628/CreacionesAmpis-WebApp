@@ -1,0 +1,25 @@
+# Carpetas de Visual Studio
+.vs/
+.vscode/
+bin/
+obj/
+
+# Archivos de usuario
+*.user
+*.suo
+
+# Archivos temporales
+*.db
+*.cache
+*.log
+
+# Índices de Copilot
+CopilotIndices/
+
+# FileContentIndex
+FileContentIndex/
+
+# Layouts de Visual Studio
+*.wsuo
+DocumentLayout.json
+DocumentLayout.backup
