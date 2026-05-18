@@ -1,15 +1,5 @@
 <Solution>
-  <Folder Name="/Core/">
-    <Project Path="CreacionesAmpis.Application/CreacionesAmpis.Application.csproj" />
-    <Project Path="CreacionesAmpis.Domain/CreacionesAmpis.Domain.csproj" />
-  </Folder>
-  <Folder Name="/Infrastructure/">
-    <Project Path="CreacionesAmpis.Persistence/CreacionesAmpis.Persistence.csproj" />
-  </Folder>
   <Folder Name="/Presenters/">
     <Project Path="CreacionesAmpis.Web/CreacionesAmpis.Web.csproj" />
-  </Folder>
-  <Folder Name="/Tests/">
-    <Project Path="CreacionesAmpis.Tests/CreacionesAmpis.Tests.csproj" />
   </Folder>
 </Solution>
