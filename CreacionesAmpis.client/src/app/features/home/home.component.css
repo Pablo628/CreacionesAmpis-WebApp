@@ -1,0 +1,129 @@
+/* ── Hero layout ── */
+.hero {
+  display: flex;
+  height: 100vh;
+  padding-top: 68px; /* altura del navbar */
+}
+
+/* ── Lado izquierdo ── */
+.hero-left {
+  flex: 1;
+  background: #fce8ef;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 60px 48px;
+  text-align: center;
+}
+
+.hero-content {
+  max-width: 460px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* ── Badge ── */
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  padding: 6px 16px;
+  border-radius: 999px;
+  border: 1.5px solid #c4788b;
+  background: rgba(196, 120, 139, 0.08);
+  color: #c4788b;
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  margin-bottom: 24px;
+}
+
+.badge svg {
+  flex-shrink: 0;
+  opacity: 0.85;
+}
+
+/* ── Heading ── */
+h1 {
+  font-family: 'Yeseva One', serif;
+  font-size: 3rem;
+  font-weight: 400;
+  line-height: 1.2;
+  color: #1a1a2e;
+  margin-bottom: 20px;
+}
+
+/* ── Descripción ── */
+.hero-desc {
+  font-family: 'Lexend', sans-serif;
+  font-size: 0.9rem;
+  font-weight: 300;
+  line-height: 1.75;
+  color: #5a5a7a;
+  margin-bottom: 36px;
+}
+
+/* ── Botones ── */
+.hero-buttons {
+  display: flex;
+  gap: 14px;
+  flex-wrap: wrap;
+}
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 13px 28px;
+  border-radius: 6px;
+  font-family: 'Poppins', sans-serif;
+  font-size: 0.9rem;
+  font-weight: 500;
+  text-decoration: none;
+  border: 1.5px solid transparent;
+  cursor: pointer;
+  transition: background 0.2s, border-color 0.2s, color 0.2s;
+  white-space: nowrap;
+}
+
+.btn-primary {
+  background: #c4788b;
+  color: #fff;
+  border-color: #c4788b;
+}
+
+.btn-primary:hover {
+  background: #ae6679;
+  border-color: #ae6679;
+}
+
+.btn-outline {
+  background: transparent;
+  color: #3d3d3d;
+  border-color: #c4c4d4;
+}
+
+.btn-outline:hover {
+  border-color: #c4788b;
+  color: #c4788b;
+}
+
+/* ── Lado derecho ── */
+.hero-right {
+  flex: 1;
+  background: #faf7f5;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 40px;
+}
+
+.hero-right img {
+  height: 75vh;
+  width: auto;
+  max-width: 100%;
+  object-fit: contain;
+  border-radius: 12px;
+  box-shadow: 0 8px 40px rgba(0, 0, 0, 0.10);
+}

@@ -1,0 +1,141 @@
+.navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 100;
+  height: 68px;
+  padding: 0 48px;
+  display: flex;
+  align-items: center;
+  background: transparent;
+  transition: background 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* Fondo blanco al hacer scroll */
+.navbar.scrolled {
+  background: rgba(255, 255, 255, 0.96);
+  backdrop-filter: blur(8px);
+  box-shadow: 0 1px 12px rgba(0, 0, 0, 0.07);
+}
+
+/* ── Inner layout ── */
+.navbar-inner {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 40px;
+}
+
+/* ── Logo ── */
+.brand {
+  font-family: 'Yeseva One', serif;
+  font-size: 1.2rem;
+  font-weight: 400;
+  color: #c4788b;
+  white-space: nowrap;
+  text-decoration: none;
+}
+
+/* ── Links ── */
+.nav-links {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  gap: 36px;
+}
+
+.nav-links a {
+  font-size: 0.875rem;
+  font-weight: 400;
+  color: #3d3d3d;
+  text-decoration: none;
+  position: relative;
+  transition: color 0.2s;
+}
+
+.nav-links a::after {
+  content: '';
+  position: absolute;
+  bottom: -4px;
+  left: 0;
+  width: 0;
+  height: 1.5px;
+  background: #c4788b;
+  transition: width 0.25s ease;
+}
+
+.nav-links a:hover,
+.nav-links a.active {
+  color: #c4788b;
+}
+
+.nav-links a:hover::after,
+.nav-links a.active::after {
+  width: 100%;
+}
+
+/* ── Acciones ── */
+.nav-actions {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.icon-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: #3d3d3d;
+  padding: 8px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: color 0.2s, background 0.2s;
+}
+
+.icon-btn:hover {
+  color: #c4788b;
+  background: rgba(196, 120, 139, 0.08);
+}
+
+/* ── Botones ── */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 8px 18px;
+  border-radius: 6px;
+  font-family: 'Poppins', sans-serif;
+  font-size: 0.8125rem;
+  font-weight: 500;
+  text-decoration: none;
+  border: 1.5px solid transparent;
+  cursor: pointer;
+  transition: background 0.2s, border-color 0.2s, color 0.2s;
+  white-space: nowrap;
+  margin-left: 6px;
+}
+
+.btn-outline {
+  background: transparent;
+  color: #3d3d3d;
+  border-color: #c8c8d4;
+}
+
+.btn-outline:hover {
+  border-color: #c4788b;
+  color: #c4788b;
+}
+
+.btn-primary {
+  background: #c4788b;
+  color: #fff;
+  border-color: #c4788b;
+}
+
+.btn-primary:hover {
+  background: #ae6679;
+  border-color: #ae6679;
+}
