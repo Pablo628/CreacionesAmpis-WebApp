@@ -1,0 +1,183 @@
+:host {
+  display: block;
+}
+
+/* ── Navbar ── */
+.navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 100;
+  background: #fff;
+  height: 68px;
+  padding: 0 48px;
+  display: flex;
+  align-items: center;
+  box-shadow: 0 1px 10px rgba(0, 0, 0, 0.06);
+}
+
+.navbar-inner {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 40px;
+}
+
+.brand {
+  font-family: 'Playfair Display', serif;
+  font-style: italic;
+  font-size: 1.2rem;
+  color: #c4788b;
+  white-space: nowrap;
+}
+
+.nav-links {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  gap: 36px;
+}
+
+.nav-links a {
+  font-size: 0.875rem;
+  font-weight: 400;
+  color: #4a4a6a;
+  transition: color 0.2s;
+}
+
+.nav-links a:hover,
+.nav-links a.active {
+  color: #c4788b;
+}
+
+.nav-actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.icon-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: #4a4a6a;
+  padding: 8px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  transition: color 0.2s, background 0.2s;
+}
+
+.icon-btn:hover {
+  color: #c4788b;
+  background: #fce8ef;
+}
+
+/* ── Buttons ── */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 8px 20px;
+  border-radius: 6px;
+  font-family: 'Poppins', sans-serif;
+  font-size: 0.875rem;
+  font-weight: 500;
+  cursor: pointer;
+  border: 1.5px solid transparent;
+  transition: background 0.2s, border-color 0.2s, color 0.2s;
+  white-space: nowrap;
+}
+
+.btn-primary {
+  background: #c4788b;
+  color: #fff;
+  border-color: #c4788b;
+}
+
+.btn-primary:hover {
+  background: #ae6679;
+  border-color: #ae6679;
+}
+
+.btn-outline {
+  background: transparent;
+  color: #4a4a6a;
+  border-color: #c8c8d8;
+}
+
+.btn-outline:hover {
+  border-color: #c4788b;
+  color: #c4788b;
+}
+
+.btn-lg {
+  padding: 13px 30px;
+  font-size: 0.9375rem;
+}
+
+/* ── Hero ── */
+.hero {
+  display: flex;
+  height: 100vh;
+  padding-top: 68px;
+}
+
+.hero-left {
+  flex: 1;
+  background: #fce8ef;
+  display: flex;
+  align-items: center;
+  padding: 60px 56px 60px 80px;
+}
+
+.hero-right {
+  flex: 1;
+  overflow: hidden;
+  background: #e8d5da;
+}
+
+.hero-right img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  display: block;
+}
+
+.hero-content {
+  max-width: 460px;
+}
+
+.hero-badge {
+  display: inline-block;
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  color: #c4788b;
+  margin-bottom: 18px;
+}
+
+h1 {
+  font-family: 'Playfair Display', serif;
+  font-size: 3rem;
+  font-weight: 600;
+  line-height: 1.2;
+  color: #1a1a2e;
+  margin-bottom: 20px;
+}
+
+.hero-desc {
+  font-size: 0.9375rem;
+  font-weight: 300;
+  line-height: 1.75;
+  color: #5a5a7a;
+  margin-bottom: 36px;
+}
+
+.hero-buttons {
+  display: flex;
+  gap: 16px;
+  flex-wrap: wrap;
+}
