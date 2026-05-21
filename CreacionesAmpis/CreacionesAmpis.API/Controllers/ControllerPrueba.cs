@@ -1,18 +1,17 @@
-﻿using CreacionesAmpis.Web.Repository;
+using CreacionesAmpis.Application.Interfaces;
 using Microsoft.AspNetCore.Mvc;
-using System.Data;
 
-namespace CreacionesAmpis.Web.Controllers
+namespace CreacionesAmpis.API.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
-    public class ControllerPrueba: ControllerBase
+    public class ControllerPrueba : ControllerBase
     {
-        private readonly RepositoryPrueba _repo;
+        private readonly IModelPruebaRepository _repo;
 
-        public ControllerPrueba(IDbConnection db)
+        public ControllerPrueba(IModelPruebaRepository repo)
         {
-            _repo = new RepositoryPrueba(db);
+            _repo = repo;
         }
 
         [HttpGet("[action]")]

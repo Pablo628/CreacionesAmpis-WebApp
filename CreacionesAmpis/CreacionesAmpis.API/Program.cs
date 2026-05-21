@@ -1,3 +1,4 @@
+using CreacionesAmpis.Infrastructure;
 using MySql.Data.MySqlClient;
 using System.Data;
 
@@ -6,6 +7,8 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddScoped<IDbConnection>(sp =>
     new MySqlConnection(builder.Configuration
         .GetConnectionString("MySqlConnection")));
+
+builder.Services.AddInfrastructure();
 
 builder.Services.AddControllers()
     .AddJsonOptions(options =>
