@@ -1,0 +1,243 @@
+<div class="detalle-page">
+
+  <!-- ── Breadcrumb ── -->
+  <div class="breadcrumb-bar">
+    <a routerLink="/catalogo" class="breadcrumb-link">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none"
+        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <polyline points="15 18 9 12 15 6"/>
+      </svg>
+      Volver al catálogo
+    </a>
+  </div>
+
+  @if (producto(); as p) {
+    <div class="detalle-main">
+
+      <!-- ── Galería ── -->
+      <div class="galeria">
+        <div class="imagen-principal">
+          <img [src]="imagenActiva()" [alt]="p.nombreProducto" />
+          @if (p.esNuevo) {
+            <span class="badge-nuevo-det">Nuevo</span>
+          }
+        </div>
+
+        @if (p.imagenes.length > 1) {
+          <div class="thumbnails">
+            @for (img of p.imagenes; track img.idProductoImagen) {
+              <button class="thumb" [class.active]="imagenActiva() === img.imagenUrl"
+                (click)="setImagen(img.imagenUrl)">
+                <img [src]="img.imagenUrl" [alt]="p.nombreProducto" />
+              </button>
+            }
+          </div>
+        }
+      </div>
+
+      <!-- ── Info panel ── -->
+      <div class="info-panel">
+
+        <!-- Categoría + nombre -->
+        <p class="det-categoria">{{ getNombreCategoria(p.idCategoria) }}</p>
+        <h1 class="det-nombre">{{ p.nombreProducto }}</h1>
+
+        <!-- Precio -->
+        <div class="precio-row">
+          <span class="precio-actual">{{ formatPrecio(p.precio) }}</span>
+        </div>
+
+        <!-- Stock warning -->
+        @if (stockVariante() !== null && stockVariante()! > 0 && stockVariante()! <= 3) {
+          <p class="stock-warning">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none"
+              stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/>
+              <line x1="12" y1="9" x2="12" y2="13"/>
+              <line x1="12" y1="17" x2="12.01" y2="17"/>
+            </svg>
+            ¡Solo quedan {{ stockVariante() }} unidades disponibles!
+          </p>
+        }
+
+        @if (stockVariante() === 0) {
+          <p class="stock-agotado">Esta combinación está agotada.</p>
+        }
+
+        <div class="separador"></div>
+
+        <!-- Selector de color -->
+        <div class="selector-group">
+          <p class="selector-label">
+            Color:&nbsp;<strong>{{ colorSeleccionado() ?? 'Selecciona un color' }}</strong>
+          </p>
+          <div class="swatches-det">
+            @for (color of coloresUnicos(); track color) {
+              <button class="swatch-det"
+                [class.active]="colorSeleccionado() === color"
+                [style.background]="getColorHex(color)"
+                [title]="color"
+                (click)="seleccionarColor(color)">
+              </button>
+            }
+          </div>
+        </div>
+
+        <!-- Selector de talla -->
+        <div class="selector-group">
+          <div class="selector-header-row">
+            <p class="selector-label">
+              Talla:&nbsp;<strong>{{ tallaSeleccionada() ?? 'Selecciona tu talla' }}</strong>
+            </p>
+            <a routerLink="/guia-tallas" class="guia-link">
+              Ver guía de tallas
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none"
+                stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <polyline points="9 18 15 12 9 6"/>
+              </svg>
+            </a>
+          </div>
+          <div class="tallas-det">
+            @for (v of tallasDisponibles(); track v.talla) {
+              <button class="talla-btn-det"
+                [class.active]="tallaSeleccionada() === v.talla"
+                [class.agotada]="v.stock === 0"
+                [disabled]="v.stock === 0"
+                (click)="seleccionarTalla(v.talla)">
+                {{ v.talla }}
+              </button>
+            }
+          </div>
+          @if (!colorSeleccionado()) {
+            <p class="talla-hint">Selecciona primero un color para ver las tallas disponibles.</p>
+          }
+        </div>
+
+        <div class="separador"></div>
+
+        <!-- Cantidad -->
+        <div class="selector-group cantidad-row">
+          <p class="selector-label">Cantidad</p>
+          <div class="cantidad-control">
+            <button class="cant-btn" (click)="cambiarCantidad(-1)" [disabled]="cantidad() <= 1">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none"
+                stroke="currentColor" stroke-width="2.5" stroke-linecap="round">
+                <line x1="5" y1="12" x2="19" y2="12"/>
+              </svg>
+            </button>
+            <span class="cant-valor">{{ cantidad() }}</span>
+            <button class="cant-btn" (click)="cambiarCantidad(1)"
+              [disabled]="cantidad() >= (stockVariante() ?? 99)">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none"
+                stroke="currentColor" stroke-width="2.5" stroke-linecap="round">
+                <line x1="12" y1="5" x2="12" y2="19"/>
+                <line x1="5" y1="12" x2="19" y2="12"/>
+              </svg>
+            </button>
+          </div>
+        </div>
+
+        <!-- CTA -->
+        <div class="cta-group">
+          <button class="btn-carrito" [class.agregado]="agregado()"
+            [disabled]="!puedeAgregar()" (click)="agregarAlCarrito()">
+            @if (agregado()) {
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none"
+                stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                <polyline points="20 6 9 17 4 12"/>
+              </svg>
+              ¡Agregado al carrito!
+            } @else {
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none"
+                stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/>
+                <line x1="3" y1="6" x2="21" y2="6"/>
+                <path d="M16 10a4 4 0 0 1-8 0"/>
+              </svg>
+              Agregar al carrito
+            }
+          </button>
+
+          <button class="btn-favorito-det" [class.activo]="favorito()"
+            (click)="toggleFavorito()">
+            <svg width="18" height="18" viewBox="0 0 24 24"
+              [attr.fill]="favorito() ? '#c4788b' : 'none'"
+              stroke="#c4788b" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06
+                       a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78
+                       1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
+            </svg>
+            {{ favorito() ? 'En favoritos' : 'Favorito' }}
+          </button>
+        </div>
+
+        <div class="separador"></div>
+
+        <!-- Acordeón -->
+        <div class="acordeon">
+
+          <div class="acordeon-item">
+            <button class="acordeon-btn" (click)="toggleAcordeon('descripcion')">
+              <span>Descripción</span>
+              <svg class="acordeon-chevron" [class.open]="acordeonAbierto() === 'descripcion'"
+                width="16" height="16" viewBox="0 0 24 24" fill="none"
+                stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <polyline points="6 9 12 15 18 9"/>
+              </svg>
+            </button>
+            @if (acordeonAbierto() === 'descripcion') {
+              <div class="acordeon-content">
+                <p>{{ p.descripcion }}</p>
+              </div>
+            }
+          </div>
+
+          <div class="acordeon-item">
+            <button class="acordeon-btn" (click)="toggleAcordeon('materiales')">
+              <span>Materiales & Cuidados</span>
+              <svg class="acordeon-chevron" [class.open]="acordeonAbierto() === 'materiales'"
+                width="16" height="16" viewBox="0 0 24 24" fill="none"
+                stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <polyline points="6 9 12 15 18 9"/>
+              </svg>
+            </button>
+            @if (acordeonAbierto() === 'materiales') {
+              <div class="acordeon-content">
+                <p>{{ p.materialInfo }}</p>
+              </div>
+            }
+          </div>
+
+          <div class="acordeon-item">
+            <button class="acordeon-btn" (click)="toggleAcordeon('envio')">
+              <span>Envío & Devoluciones</span>
+              <svg class="acordeon-chevron" [class.open]="acordeonAbierto() === 'envio'"
+                width="16" height="16" viewBox="0 0 24 24" fill="none"
+                stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <polyline points="6 9 12 15 18 9"/>
+              </svg>
+            </button>
+            @if (acordeonAbierto() === 'envio') {
+              <div class="acordeon-content">
+                <p>Envío gratis en compras superiores a $150.000. Despachos en 1–3 días hábiles. Cambios y devoluciones dentro de los 15 días siguientes a la entrega.</p>
+              </div>
+            }
+          </div>
+
+        </div>
+
+      </div>
+    </div>
+
+  } @else {
+    <div class="not-found">
+      <svg width="52" height="52" viewBox="0 0 24 24" fill="none"
+        stroke="#e0d4d8" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round">
+        <circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/>
+      </svg>
+      <p class="nf-title">Producto no encontrado</p>
+      <a routerLink="/catalogo" class="nf-btn">Volver al catálogo</a>
+    </div>
+  }
+
+</div>
