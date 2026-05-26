@@ -1,0 +1,269 @@
+/* ── Layout principal ── */
+.login-page {
+  display: flex;
+  height: 100vh;
+  padding-top: 68px;
+}
+
+/* ── Panel izquierdo: imagen ── */
+.login-left {
+  flex: 1 1 0;
+  min-width: 0;
+  position: relative;
+  overflow: hidden;
+  background: #1a1a2e;
+}
+
+.login-left img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 0%;
+  display: block;
+}
+
+.login-left-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to top,
+    rgba(26, 26, 46, 0.65) 0%,
+    rgba(26, 26, 46, 0.1) 60%,
+    transparent 100%
+  );
+  display: flex;
+  align-items: flex-end;
+  padding: 40px 44px;
+}
+
+.overlay-quote {
+  font-family: 'Yeseva One', serif;
+  font-size: 1.4rem;
+  font-weight: 400;
+  color: #fff;
+  line-height: 1.4;
+  max-width: 340px;
+  opacity: 0.92;
+}
+
+/* ── Panel derecho: formulario ── */
+.login-right {
+  flex: 1 1 0;
+  min-width: 0;
+  background: #fce8ef;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 48px;
+}
+
+.login-card {
+  width: 100%;
+  max-width: 400px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+/* ── Marca ── */
+.login-brand {
+  font-family: 'Yeseva One', serif;
+  font-size: 1.1rem;
+  font-weight: 400;
+  color: #c4788b;
+  text-decoration: none;
+  margin-bottom: 36px;
+  letter-spacing: 0.01em;
+  align-self: center;
+}
+
+/* ── Títulos ── */
+h2 {
+  font-family: 'Yeseva One', serif;
+  font-size: 2rem;
+  font-weight: 400;
+  color: #1a1a2e;
+  margin-bottom: 8px;
+  line-height: 1.2;
+  width: 100%;
+  text-align: center;
+}
+
+.login-sub {
+  font-family: 'Lexend', sans-serif;
+  font-size: 0.875rem;
+  font-weight: 300;
+  color: #5a5a7a;
+  margin-bottom: 36px;
+  width: 100%;
+  text-align: center;
+}
+
+/* ── Formulario ── */
+.login-form {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+label {
+  font-family: 'Poppins', sans-serif;
+  font-size: 0.8rem;
+  font-weight: 500;
+  color: #3d3d3d;
+  letter-spacing: 0.02em;
+}
+
+/* ── Inputs ── */
+.input-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.field-icon {
+  position: absolute;
+  left: 14px;
+  color: #9a9aaf;
+  pointer-events: none;
+  flex-shrink: 0;
+}
+
+.input-wrapper input {
+  width: 100%;
+  padding: 12px 44px 12px 42px;
+  border: 1.5px solid #e0d4d8;
+  border-radius: 8px;
+  background: #fff;
+  font-family: 'Lexend', sans-serif;
+  font-size: 0.875rem;
+  font-weight: 300;
+  color: #1a1a2e;
+  outline: none;
+  transition:
+    border-color 0.2s,
+    box-shadow 0.2s;
+}
+
+.input-wrapper input::placeholder {
+  color: #c4b8be;
+}
+
+.input-wrapper input:focus {
+  border-color: #c4788b;
+  box-shadow: 0 0 0 3px rgba(196, 120, 139, 0.12);
+}
+
+/* ── Toggle contraseña ── */
+.toggle-pass {
+  position: absolute;
+  right: 12px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: #9a9aaf;
+  padding: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: color 0.2s;
+}
+
+.toggle-pass:hover {
+  color: #c4788b;
+}
+
+/* ── Enlace olvidé contraseña ── */
+.forgot {
+  font-family: 'Lexend', sans-serif;
+  font-size: 0.78rem;
+  font-weight: 300;
+  color: #c4788b;
+  text-decoration: none;
+  align-self: flex-end;
+  margin-top: 2px;
+  transition: color 0.2s;
+}
+
+.forgot:hover {
+  color: #ae6679;
+  text-decoration: underline;
+}
+
+/* ── Error de login ── */
+.login-error {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-family: 'Lexend', sans-serif;
+  font-size: 0.8rem;
+  font-weight: 400;
+  color: #c0425a;
+  background: rgba(192, 66, 90, 0.07);
+  border: 1px solid rgba(192, 66, 90, 0.2);
+  border-radius: 6px;
+  padding: 10px 14px;
+}
+
+.input-error {
+  border-color: #c0425a !important;
+  box-shadow: 0 0 0 3px rgba(192, 66, 90, 0.1) !important;
+}
+
+/* ── Botón Ingresar ── */
+.btn-ingresar {
+  width: 100%;
+  padding: 13px;
+  background: #c4788b;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  font-family: 'Poppins', sans-serif;
+  font-size: 0.9rem;
+  font-weight: 500;
+  cursor: pointer;
+  margin-top: 6px;
+  transition:
+    background 0.2s,
+    transform 0.15s;
+  letter-spacing: 0.02em;
+}
+
+.btn-ingresar:hover {
+  background: #ae6679;
+}
+
+.btn-ingresar:active {
+  transform: scale(0.985);
+}
+
+/* ── Link registro ── */
+.register-link {
+  font-family: 'Lexend', sans-serif;
+  font-size: 0.82rem;
+  font-weight: 300;
+  color: #5a5a7a;
+  margin-top: 24px;
+  align-self: center;
+}
+
+.register-link a {
+  color: #c4788b;
+  text-decoration: none;
+  font-weight: 400;
+  transition: color 0.2s;
+}
+
+.register-link a:hover {
+  color: #ae6679;
+  text-decoration: underline;
+}

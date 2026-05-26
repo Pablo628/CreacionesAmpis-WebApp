@@ -1,0 +1,456 @@
+/* ── Página ── */
+.catalogo-page {
+  padding-top: 68px;
+  min-height: 100vh;
+  background: #fdfaf9;
+}
+
+/* ── Header ── */
+.catalogo-header {
+  text-align: center;
+  padding: 52px 48px 44px;
+  background: #fce8ef;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+}
+
+.header-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 5px 14px;
+  border-radius: 999px;
+  border: 1.5px solid #c4788b;
+  background: rgba(196, 120, 139, 0.08);
+  color: #c4788b;
+  font-family: 'Poppins', sans-serif;
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.catalogo-header h1 {
+  font-family: 'Yeseva One', serif;
+  font-size: 2.6rem;
+  font-weight: 400;
+  color: #1a1a2e;
+  line-height: 1.2;
+  margin: 0;
+}
+
+.catalogo-header p {
+  font-family: 'Lexend', sans-serif;
+  font-size: 0.9rem;
+  font-weight: 300;
+  color: #5a5a7a;
+  max-width: 480px;
+  line-height: 1.6;
+  margin: 0;
+}
+
+/* ── Controls bar ── */
+.controls-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 14px 48px;
+  background: #fff;
+  border-bottom: 1px solid #ede4e7;
+  position: sticky;
+  top: 68px;
+  z-index: 50;
+  gap: 16px;
+}
+
+/* ── Filtros ── */
+.filtros {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.filtro-pill {
+  padding: 7px 18px;
+  border-radius: 999px;
+  border: 1.5px solid #e0d4d8;
+  background: transparent;
+  font-family: 'Poppins', sans-serif;
+  font-size: 0.8rem;
+  font-weight: 400;
+  color: #5a5a7a;
+  cursor: pointer;
+  transition: background 0.2s, border-color 0.2s, color 0.2s;
+  white-space: nowrap;
+}
+
+.filtro-pill:hover {
+  border-color: #c4788b;
+  color: #c4788b;
+}
+
+.filtro-pill.active {
+  background: #c4788b;
+  border-color: #c4788b;
+  color: #fff;
+}
+
+/* ── Sort dropdown ── */
+.sort-wrapper {
+  position: relative;
+  flex-shrink: 0;
+}
+
+.sort-btn {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  padding: 7px 14px;
+  border: 1.5px solid #e0d4d8;
+  border-radius: 8px;
+  background: transparent;
+  font-family: 'Poppins', sans-serif;
+  font-size: 0.8rem;
+  font-weight: 400;
+  color: #3d3d3d;
+  cursor: pointer;
+  transition: border-color 0.2s, color 0.2s;
+  white-space: nowrap;
+}
+
+.sort-btn:hover,
+.sort-btn.open {
+  border-color: #c4788b;
+  color: #c4788b;
+}
+
+.sort-chevron {
+  transition: transform 0.2s;
+}
+
+.sort-chevron.rotated {
+  transform: rotate(180deg);
+}
+
+.sort-menu {
+  position: absolute;
+  top: calc(100% + 8px);
+  right: 0;
+  min-width: 175px;
+  background: #fff;
+  border: 1px solid #ede4e7;
+  border-radius: 10px;
+  box-shadow: 0 8px 28px rgba(0, 0, 0, 0.10);
+  overflow: hidden;
+  z-index: 100;
+  animation: menuIn 0.18s ease;
+}
+
+@keyframes menuIn {
+  from { opacity: 0; transform: translateY(-6px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.sort-option {
+  width: 100%;
+  padding: 11px 16px;
+  background: none;
+  border: none;
+  text-align: left;
+  font-family: 'Lexend', sans-serif;
+  font-size: 0.825rem;
+  font-weight: 300;
+  color: #3d3d3d;
+  cursor: pointer;
+  transition: background 0.15s;
+}
+
+.sort-option:hover {
+  background: #fce8ef;
+  color: #c4788b;
+}
+
+.sort-option.active-option {
+  color: #c4788b;
+  font-weight: 500;
+}
+
+/* ── Contador ── */
+.result-count {
+  padding: 16px 48px 4px;
+  font-family: 'Lexend', sans-serif;
+  font-size: 0.78rem;
+  font-weight: 300;
+  color: #9a9aaf;
+}
+
+/* ── Grid ── */
+.productos-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 24px;
+  padding: 20px 48px 64px;
+}
+
+/* ── Card ── */
+.producto-card {
+  border-radius: 14px;
+  overflow: hidden;
+  background: #fff;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.05);
+  transition: transform 0.28s ease, box-shadow 0.28s ease;
+  cursor: pointer;
+}
+
+.producto-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 18px 44px rgba(0, 0, 0, 0.12);
+}
+
+/* ── Imagen ── */
+.card-image {
+  position: relative;
+  aspect-ratio: 3 / 4;
+  overflow: hidden;
+  background: #f5f0f2;
+}
+
+.card-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center top;
+  display: block;
+  transition: transform 0.45s ease;
+}
+
+.producto-card:hover .card-image img {
+  transform: scale(1.07);
+}
+
+/* ── Overlay ── */
+.card-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(26, 26, 46, 0.28);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.producto-card:hover .card-overlay {
+  opacity: 1;
+}
+
+.btn-ver {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  padding: 11px 22px;
+  background: #fff;
+  color: #1a1a2e;
+  border: none;
+  border-radius: 6px;
+  font-family: 'Poppins', sans-serif;
+  font-size: 0.82rem;
+  font-weight: 500;
+  cursor: pointer;
+  transform: translateY(10px);
+  transition: transform 0.3s ease, background 0.2s, color 0.2s;
+}
+
+.producto-card:hover .btn-ver {
+  transform: translateY(0);
+}
+
+.btn-ver:hover {
+  background: #c4788b;
+  color: #fff;
+}
+
+/* ── Badges ── */
+.badge-categoria {
+  position: absolute;
+  top: 12px;
+  left: 12px;
+  padding: 4px 10px;
+  background: rgba(255, 255, 255, 0.92);
+  border-radius: 999px;
+  font-family: 'Poppins', sans-serif;
+  font-size: 0.65rem;
+  font-weight: 600;
+  color: #1a1a2e;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  backdrop-filter: blur(4px);
+}
+
+.badge-nuevo {
+  position: absolute;
+  top: 12px;
+  right: 48px;
+  padding: 4px 10px;
+  background: #c4788b;
+  border-radius: 999px;
+  font-family: 'Poppins', sans-serif;
+  font-size: 0.65rem;
+  font-weight: 600;
+  color: #fff;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+/* ── Favorito ── */
+.btn-favorito {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.9);
+  border: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  color: #9a9aaf;
+  backdrop-filter: blur(4px);
+  opacity: 0;
+  transform: scale(0.75);
+  transition: opacity 0.3s ease, transform 0.3s ease, color 0.2s;
+}
+
+.producto-card:hover .btn-favorito {
+  opacity: 1;
+  transform: scale(1);
+}
+
+.btn-favorito:hover {
+  color: #c4788b;
+}
+
+/* ── Info ── */
+.card-info {
+  padding: 14px 16px 18px;
+}
+
+.card-categoria-label {
+  font-family: 'Poppins', sans-serif;
+  font-size: 0.68rem;
+  font-weight: 500;
+  color: #c4788b;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  margin-bottom: 4px;
+}
+
+.card-nombre {
+  font-family: 'Poppins', sans-serif;
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: #1a1a2e;
+  margin-bottom: 6px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.card-precio {
+  font-family: 'Lexend', sans-serif;
+  font-size: 0.95rem;
+  font-weight: 500;
+  color: #1a1a2e;
+  margin-bottom: 12px;
+}
+
+/* ── Swatches ── */
+.swatches {
+  display: flex;
+  gap: 6px;
+  margin-bottom: 10px;
+}
+
+.swatch {
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  border: 2px solid #fff;
+  box-shadow: 0 0 0 1.5px #d8cdd0;
+  display: inline-block;
+  cursor: pointer;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.swatch:hover {
+  transform: scale(1.25);
+  box-shadow: 0 0 0 2px #c4788b;
+}
+
+/* ── Tallas ── */
+.tallas {
+  display: flex;
+  gap: 5px;
+  flex-wrap: wrap;
+}
+
+.talla-tag {
+  padding: 3px 8px;
+  border: 1px solid #e0d4d8;
+  border-radius: 4px;
+  font-family: 'Poppins', sans-serif;
+  font-size: 0.67rem;
+  font-weight: 400;
+  color: #5a5a7a;
+}
+
+/* ── Empty state ── */
+.empty-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 80px 20px;
+  text-align: center;
+}
+
+.empty-icon {
+  color: #e0d4d8;
+  margin-bottom: 20px;
+}
+
+.empty-title {
+  font-family: 'Yeseva One', serif;
+  font-size: 1.3rem;
+  font-weight: 400;
+  color: #1a1a2e;
+  margin-bottom: 8px;
+}
+
+.empty-sub {
+  font-family: 'Lexend', sans-serif;
+  font-size: 0.875rem;
+  font-weight: 300;
+  color: #9a9aaf;
+  margin-bottom: 24px;
+}
+
+.empty-btn {
+  padding: 11px 28px;
+  background: #c4788b;
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  font-family: 'Poppins', sans-serif;
+  font-size: 0.875rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.empty-btn:hover {
+  background: #ae6679;
+}

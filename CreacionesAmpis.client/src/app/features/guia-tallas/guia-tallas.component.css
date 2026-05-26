@@ -1,0 +1,478 @@
+/* ── Página ── */
+.guia-page {
+  padding-top: 68px;
+  min-height: 100vh;
+  background: #fdfaf9;
+}
+
+/* ── Header ── */
+.guia-header {
+  text-align: center;
+  padding: 52px 48px 44px;
+  background: #fce8ef;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+}
+
+.header-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 5px 14px;
+  border-radius: 999px;
+  border: 1.5px solid #c4788b;
+  background: rgba(196, 120, 139, 0.08);
+  color: #c4788b;
+  font-family: 'Poppins', sans-serif;
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.guia-header h1 {
+  font-family: 'Yeseva One', serif;
+  font-size: 2.5rem;
+  font-weight: 400;
+  color: #1a1a2e;
+  margin: 0;
+}
+
+.guia-header p {
+  font-family: 'Lexend', sans-serif;
+  font-size: 0.9rem;
+  font-weight: 300;
+  color: #5a5a7a;
+  margin: 0;
+}
+
+/* ── Main layout ── */
+.guia-main {
+  display: grid;
+  grid-template-columns: 1fr 360px;
+  gap: 32px;
+  padding: 40px 48px;
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+/* ── Tabla section ── */
+.tabla-section {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.tabla-tabs {
+  display: flex;
+  gap: 8px;
+}
+
+.tabla-tab {
+  padding: 9px 22px;
+  border-radius: 999px;
+  border: 1.5px solid #e0d4d8;
+  background: transparent;
+  font-family: 'Poppins', sans-serif;
+  font-size: 0.82rem;
+  font-weight: 400;
+  color: #5a5a7a;
+  cursor: pointer;
+  transition: background 0.2s, border-color 0.2s, color 0.2s;
+}
+
+.tabla-tab:hover {
+  border-color: #c4788b;
+  color: #c4788b;
+}
+
+.tabla-tab.active {
+  background: #c4788b;
+  border-color: #c4788b;
+  color: #fff;
+}
+
+.tabla-desc {
+  font-family: 'Lexend', sans-serif;
+  font-size: 0.82rem;
+  font-weight: 300;
+  color: #9a9aaf;
+  margin: 0;
+}
+
+/* ── Tabla ── */
+.tabla-wrapper {
+  border-radius: 14px;
+  overflow: hidden;
+  border: 1px solid #ede4e7;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.04);
+}
+
+.tallas-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.tallas-table thead tr {
+  background: #fce8ef;
+}
+
+.tallas-table th {
+  padding: 14px 20px;
+  text-align: left;
+  font-family: 'Poppins', sans-serif;
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: #1a1a2e;
+  letter-spacing: 0.04em;
+}
+
+.tallas-table tbody tr {
+  border-top: 1px solid #f0e8eb;
+  transition: background 0.2s;
+}
+
+.tallas-table tbody tr:hover {
+  background: #fdf3f6;
+}
+
+.tallas-table tbody tr.highlighted {
+  background: rgba(196, 120, 139, 0.10);
+}
+
+.tallas-table td {
+  padding: 14px 20px;
+  font-family: 'Lexend', sans-serif;
+  font-size: 0.875rem;
+  font-weight: 300;
+  color: #3d3d3d;
+}
+
+.talla-col {
+  width: 80px;
+}
+
+.talla-pill {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: #f5f0f2;
+  font-family: 'Poppins', sans-serif;
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: #5a5a7a;
+  transition: background 0.3s, color 0.3s;
+}
+
+.talla-pill.active-pill {
+  background: #c4788b;
+  color: #fff;
+}
+
+.tabla-nota {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-family: 'Lexend', sans-serif;
+  font-size: 0.78rem;
+  font-weight: 300;
+  color: #9a9aaf;
+  margin: 0;
+}
+
+/* ── Calculadora ── */
+.calc-section {
+  position: sticky;
+  top: calc(68px + 20px);
+  height: fit-content;
+}
+
+.calc-card {
+  background: #fff;
+  border: 1px solid #ede4e7;
+  border-radius: 16px;
+  padding: 28px 24px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.calc-icon {
+  width: 48px;
+  height: 48px;
+  border-radius: 12px;
+  background: rgba(196, 120, 139, 0.10);
+  color: #c4788b;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.calc-card h3 {
+  font-family: 'Yeseva One', serif;
+  font-size: 1.3rem;
+  font-weight: 400;
+  color: #1a1a2e;
+  margin: 0;
+}
+
+.calc-sub {
+  font-family: 'Lexend', sans-serif;
+  font-size: 0.825rem;
+  font-weight: 300;
+  color: #5a5a7a;
+  margin: 0;
+  line-height: 1.5;
+}
+
+.calc-fields {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.calc-field {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.calc-field label {
+  font-family: 'Poppins', sans-serif;
+  font-size: 0.8rem;
+  font-weight: 500;
+  color: #3d3d3d;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.required {
+  color: #c4788b;
+}
+
+.input-unit {
+  display: flex;
+  align-items: center;
+  border: 1.5px solid #e0d4d8;
+  border-radius: 8px;
+  overflow: hidden;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.input-unit:focus-within {
+  border-color: #c4788b;
+  box-shadow: 0 0 0 3px rgba(196, 120, 139, 0.12);
+}
+
+.input-unit input {
+  flex: 1;
+  padding: 11px 14px;
+  border: none;
+  outline: none;
+  background: transparent;
+  font-family: 'Lexend', sans-serif;
+  font-size: 0.875rem;
+  font-weight: 300;
+  color: #1a1a2e;
+}
+
+.input-unit input::placeholder {
+  color: #c4b8be;
+}
+
+.unit {
+  padding: 0 14px;
+  font-family: 'Poppins', sans-serif;
+  font-size: 0.78rem;
+  font-weight: 500;
+  color: #9a9aaf;
+  background: #fdf3f6;
+  border-left: 1.5px solid #e0d4d8;
+  height: 100%;
+  display: flex;
+  align-items: center;
+}
+
+/* ── Botón calcular ── */
+.btn-calcular {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  width: 100%;
+  padding: 13px;
+  background: #c4788b;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  font-family: 'Poppins', sans-serif;
+  font-size: 0.875rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background 0.2s, transform 0.15s;
+  letter-spacing: 0.02em;
+}
+
+.btn-calcular:hover { background: #ae6679; }
+.btn-calcular:active { transform: scale(0.985); }
+
+/* ── Resultado ── */
+.resultado {
+  text-align: center;
+  padding: 20px 16px;
+  background: rgba(196, 120, 139, 0.07);
+  border: 1px solid rgba(196, 120, 139, 0.2);
+  border-radius: 10px;
+  animation: fadeUp 0.35s ease;
+}
+
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(8px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.resultado-label {
+  font-family: 'Lexend', sans-serif;
+  font-size: 0.8rem;
+  font-weight: 300;
+  color: #5a5a7a;
+  margin-bottom: 8px;
+}
+
+.resultado-talla {
+  font-family: 'Yeseva One', serif;
+  font-size: 3rem;
+  color: #c4788b;
+  line-height: 1;
+  margin-bottom: 8px;
+}
+
+.resultado-hint {
+  font-family: 'Lexend', sans-serif;
+  font-size: 0.75rem;
+  font-weight: 300;
+  color: #9a9aaf;
+  margin: 0;
+}
+
+.calc-error {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-family: 'Lexend', sans-serif;
+  font-size: 0.8rem;
+  color: #c0425a;
+  background: rgba(192, 66, 90, 0.07);
+  border: 1px solid rgba(192, 66, 90, 0.2);
+  border-radius: 8px;
+  padding: 10px 14px;
+  margin: 0;
+}
+
+/* ── Cómo medir ── */
+.como-medir {
+  background: #fce8ef;
+  padding: 60px 48px;
+  margin-top: 16px;
+}
+
+.como-inner {
+  max-width: 900px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.como-badge {
+  display: inline-block;
+  padding: 4px 14px;
+  border-radius: 999px;
+  background: rgba(196, 120, 139, 0.12);
+  color: #c4788b;
+  font-family: 'Poppins', sans-serif;
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  margin-bottom: 16px;
+}
+
+.como-inner h2 {
+  font-family: 'Yeseva One', serif;
+  font-size: 2rem;
+  font-weight: 400;
+  color: #1a1a2e;
+  margin-bottom: 10px;
+}
+
+.como-sub {
+  font-family: 'Lexend', sans-serif;
+  font-size: 0.875rem;
+  font-weight: 300;
+  color: #5a5a7a;
+  margin-bottom: 40px;
+}
+
+.pasos-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+}
+
+.paso-card {
+  background: #fff;
+  border-radius: 16px;
+  padding: 28px 24px;
+  text-align: left;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.05);
+  position: relative;
+  transition: transform 0.25s, box-shadow 0.25s;
+}
+
+.paso-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.10);
+}
+
+.paso-numero {
+  font-family: 'Yeseva One', serif;
+  font-size: 2.5rem;
+  color: rgba(196, 120, 139, 0.15);
+  line-height: 1;
+  margin-bottom: 12px;
+}
+
+.paso-icon {
+  width: 52px;
+  height: 52px;
+  border-radius: 12px;
+  background: rgba(196, 120, 139, 0.10);
+  color: #c4788b;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 16px;
+}
+
+.paso-card h4 {
+  font-family: 'Poppins', sans-serif;
+  font-size: 1rem;
+  font-weight: 600;
+  color: #1a1a2e;
+  margin-bottom: 8px;
+}
+
+.paso-card p {
+  font-family: 'Lexend', sans-serif;
+  font-size: 0.85rem;
+  font-weight: 300;
+  color: #5a5a7a;
+  line-height: 1.65;
+  margin: 0;
+}
