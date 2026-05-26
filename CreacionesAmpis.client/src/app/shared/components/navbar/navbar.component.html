@@ -33,16 +33,52 @@
         </svg>
       </button>
 
-      <button class="icon-btn" aria-label="Mi cuenta">
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="none"
-          stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
-          <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
-          <circle cx="12" cy="7" r="4"/>
-        </svg>
-      </button>
+      <!-- Sin sesión: botones -->
+      @if (!auth.isLoggedIn()) {
+        <button class="icon-btn" aria-label="Mi cuenta">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none"
+            stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
+            <circle cx="12" cy="7" r="4"/>
+          </svg>
+        </button>
+        <a routerLink="/ingresar" class="btn btn-outline">Ingresar</a>
+        <a routerLink="/registrarse" class="btn btn-primary">Registrarse</a>
+      }
 
-      <a routerLink="/ingresar" class="btn btn-outline">Ingresar</a>
-      <a routerLink="/registrarse" class="btn btn-primary">Registrarse</a>
+      <!-- Con sesión: avatar -->
+      @if (auth.isLoggedIn()) {
+        <div class="avatar-wrapper">
+          <button class="avatar-btn" (click)="toggleMenu()" [attr.aria-expanded]="menuOpen()">
+            <span class="avatar-circle">{{ auth.user()?.initials }}</span>
+            <span class="avatar-name">{{ auth.user()?.name }}</span>
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none"
+              stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+              class="avatar-chevron" [class.rotated]="menuOpen()">
+              <polyline points="6 9 12 15 18 9"/>
+            </svg>
+          </button>
+
+          @if (menuOpen()) {
+            <div class="avatar-menu">
+              <div class="menu-user">
+                <span class="menu-name">{{ auth.user()?.name }}</span>
+                <span class="menu-email">{{ auth.user()?.email }}</span>
+              </div>
+              <hr class="menu-divider" />
+              <button class="menu-item menu-logout" (click)="logout()">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none"
+                  stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/>
+                  <polyline points="16 17 21 12 16 7"/>
+                  <line x1="21" y1="12" x2="9" y2="12"/>
+                </svg>
+                Cerrar sesión
+              </button>
+            </div>
+          }
+        </div>
+      }
 
     </div>
   </div>
