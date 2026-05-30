@@ -6,5 +6,8 @@ namespace CreacionesAmpis.Application.Interfaces
     {
         Task<IEnumerable<ModelPrueba>> GetAllAsync();
         Task<ModelPrueba?> GetByIdAsync(int id);
+        Task<ModelPrueba> CreateAsync(ModelPrueba entity);
+        Task<bool> UpdateAsync(ModelPrueba entity);
+        Task<bool> DeleteAsync(int id);
     }
 }
