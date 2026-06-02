@@ -1,3 +1,4 @@
+using CreacionesAmpis.API.Middlewares;
 using CreacionesAmpis.Infrastructure;
 using MySql.Data.MySqlClient;
 using System.Data;
@@ -27,6 +28,8 @@ builder.Services.AddCors(options =>
 });
 
 var app = builder.Build();
+
+app.UseMiddleware<ErrorHandlerMiddleware>();
 
 if (app.Environment.IsDevelopment())
 {
