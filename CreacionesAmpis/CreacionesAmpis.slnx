@@ -1,5 +1,12 @@
 <Solution>
+  <Folder Name="/Core/">
+    <Project Path="CreacionesAmpis.Domain/CreacionesAmpis.Domain.csproj" />
+    <Project Path="CreacionesAmpis.Application/CreacionesAmpis.Application.csproj" />
+  </Folder>
+  <Folder Name="/Infrastructure/">
+    <Project Path="CreacionesAmpis.Infrastructure/CreacionesAmpis.Infrastructure.csproj" />
+  </Folder>
   <Folder Name="/Presenters/">
-    <Project Path="CreacionesAmpis.Web/CreacionesAmpis.Web.csproj" />
+    <Project Path="CreacionesAmpis.API/CreacionesAmpis.API.csproj" />
   </Folder>
 </Solution>

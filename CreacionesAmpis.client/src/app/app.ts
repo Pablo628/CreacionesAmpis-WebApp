@@ -34,7 +34,13 @@ const routeAnimations = trigger('routeAnimations', [
   templateUrl: './app.html',
   styleUrl: './app.css',
   animations: [routeAnimations],
+  animations: [routeAnimations],
 })
+export class App {
+  prepareRoute(outlet: RouterOutlet) {
+    return outlet?.activatedRouteData?.['animation'];
+  }
+}
 export class App {
   prepareRoute(outlet: RouterOutlet) {
     return outlet?.activatedRouteData?.['animation'];

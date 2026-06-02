@@ -14,6 +14,7 @@ export class NavbarComponent {
   private router = inject(Router);
   scrolled = signal(false);
   menuOpen = signal(false);
+  menuOpen = signal(false);
 
   @HostListener('window:scroll')
   onScroll() {
