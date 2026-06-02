@@ -1,4 +1,4 @@
-using CreacionesAmpis.Domain;
+using System;
 using CreacionesAmpis.Domain.Entities;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
@@ -14,23 +14,29 @@ namespace CreacionesAmpis.Tests
         public void CrearModeloPruebaValido_DebeRetornarTrue()
         {
             // Arrange
-            var nombre = "Prueba 1";
-            var descripcion = "Descripción de prueba";
-            var precio = 100.50m;
+            var nombre = "Usuario Test";
+            var email = "test@example.com";
+            var contrasena = "123456";
+            var rol = "Cliente";
 
             // Act
             var modelo = new ModelPrueba
             {
                 Nombre = nombre,
-                Descripcion = descripcion,
-                Precio = precio
+                Email = email,
+                Contrasena = contrasena,
+                Rol = rol,
+                Activo = true,
+                FechaCreacion = DateTime.UtcNow
             };
 
             // Assert
             Assert.IsNotNull(modelo);
             Assert.AreEqual(nombre, modelo.Nombre);
-            Assert.AreEqual(descripcion, modelo.Descripcion);
-            Assert.AreEqual(precio, modelo.Precio);
+            Assert.AreEqual(email, modelo.Email);
+            Assert.AreEqual(contrasena, modelo.Contrasena);
+            Assert.AreEqual(rol, modelo.Rol);
+            Assert.IsTrue(modelo.Activo);
         }
 
         /// <summary>
@@ -43,8 +49,9 @@ namespace CreacionesAmpis.Tests
             var modelo = new ModelPrueba
             {
                 Nombre = "", // Inválido
-                Descripcion = "Descripción",
-                Precio = 100.50m
+                Email = "test@example.com",
+                Contrasena = "123456",
+                Rol = "Cliente"
             };
 
             // Act & Assert
@@ -52,21 +59,22 @@ namespace CreacionesAmpis.Tests
         }
 
         /// <summary>
-        /// Prueba 3: Validar que ModeloPrueba con precio negativo es inválido
+        /// Prueba 3: Validar que ModeloPrueba con email vacío es inválido
         /// </summary>
         [TestMethod]
-        public void CrearModeloPruebaConPrecioNegativo_DebeSerInvalido()
+        public void CrearModeloPruebaConEmailVacio_DebeSerInvalido()
         {
             // Arrange
             var modelo = new ModelPrueba
             {
-                Nombre = "Prueba",
-                Descripcion = "Descripción",
-                Precio = -50m // Inválido
+                Nombre = "Usuario",
+                Email = "", // Inválido
+                Contrasena = "123456",
+                Rol = "Cliente"
             };
 
             // Act & Assert
-            Assert.IsTrue(modelo.Precio < 0);
+            Assert.IsTrue(string.IsNullOrWhiteSpace(modelo.Email));
         }
     }
 }

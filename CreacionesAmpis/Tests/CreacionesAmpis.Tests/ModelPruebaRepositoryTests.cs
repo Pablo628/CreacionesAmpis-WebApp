@@ -1,81 +1,105 @@
-using CreacionesAmpis.Domain;
+using System.Collections.Generic; 
+using System.Linq;                
+using System.Threading.Tasks;
 using CreacionesAmpis.Domain.Entities;
-using CreacionesAmpis.Infrastructure.Persistence.Repositories;
+using CreacionesAmpis.Infrastructure.Persistence;
 using CreacionesAmpis.Infrastructure.Repositories;
-using Microsoft.EntityFrameworkCore;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
+using System.Data;
 
 namespace CreacionesAmpis.Tests
 {
     [TestClass]
     public class ModelPruebaRepositoryTests
     {
-        private Mock<CreacionesAmpisContext> _mockContext;
-        private Mock<DbSet<ModelPrueba>> _mockDbSet;
+        private Mock<IDapperCreacionesAmpis> _mockDapper;
         private ModelPruebaRepository _repository;
 
         [TestInitialize]
         public void Setup()
         {
-            _mockContext = new Mock<CreacionesAmpisContext>();
-            _mockDbSet = new Mock<DbSet<ModelPrueba>>();
-            _mockContext.Setup(c => c.Set<ModelPrueba>()).Returns(_mockDbSet.Object);
-            _repository = new ModelPruebaRepository(_mockContext.Object);
+            _mockDapper = new Mock<IDapperCreacionesAmpis>();
+            _repository = new ModelPruebaRepository(_mockDapper.Object);
         }
 
-        /// <summary>
-        /// Prueba 9: Insertar un ModeloPrueba en la base de datos
-        /// </summary>
         [TestMethod]
-        public async Task InsertarModeloPruebaEnBD_DebeGuardarExitosamente()
+        public async Task GetAllAsync_DebeRetornarListaDeUsuarios()
         {
             // Arrange
-            var modelo = new ModelPrueba
-            {
-                Nombre = "Producto BD Test",
-                Descripcion = "Test de inserción",
-                Precio = 300.00m
-            };
-
-            _mockDbSet.Setup(d => d.AddAsync(It.IsAny<ModelPrueba>(), CancellationToken.None))
-                .Returns(new ValueTask<EntityEntry<ModelPrueba>>(Task.FromResult<EntityEntry<ModelPrueba>>(null)));
-
-            _mockContext.Setup(c => c.SaveChangesAsync(CancellationToken.None))
-                .ReturnsAsync(1);
+            var usuariosFake = new List<ModelPrueba> { new ModelPrueba { Id = 1, Nombre = "Test" } };
+            _mockDapper.Setup(d => d.QueryAsync<ModelPrueba>(It.IsAny<string>(), null, CommandType.Text))
+                       .ReturnsAsync(usuariosFake);
 
             // Act
-            await _repository.AddAsync(modelo);
+            var result = await _repository.GetAllAsync();
 
             // Assert
-            _mockDbSet.Verify(d => d.AddAsync(It.IsAny<ModelPrueba>(), CancellationToken.None), Times.Once);
-            _mockContext.Verify(c => c.SaveChangesAsync(CancellationToken.None), Times.Once);
+            Assert.IsNotNull(result);
+            Assert.AreEqual(1, result.Count());
+            _mockDapper.Verify(d => d.QueryAsync<ModelPrueba>(It.IsAny<string>(), null, CommandType.Text), Times.Once);
         }
 
-        /// <summary>
-        /// Prueba 10: Obtener todos los registros de ModeloPrueba de la base de datos
-        /// </summary>
         [TestMethod]
-        public async Task ObtenerTodosLosRegistrosDeModelos_DebeRetornarLista()
+        public async Task GetByIdAsync_DebeRetornarUsuario_CuandoExiste()
         {
             // Arrange
-            var modelos = new List<ModelPrueba>
-            {
-                new ModelPrueba { Id = 1, Nombre = "Producto 1", Precio = 100m },
-                new ModelPrueba { Id = 2, Nombre = "Producto 2", Precio = 200m },
-                new ModelPrueba { Id = 3, Nombre = "Producto 3", Precio = 300m }
-            }.AsQueryable();
-
-            var mockData = modelos.BuildMockDbSet();
-
-            _mockContext.Setup(c => c.Set<ModelPrueba>()).Returns(mockData);
+            var usuarioFake = new ModelPrueba { Id = 1, Nombre = "Test" };
+            _mockDapper.Setup(d => d.QueryFirstOrDefaultAsync<ModelPrueba>(It.IsAny<string>(), It.IsAny<object>(), CommandType.Text))
+                       .ReturnsAsync(usuarioFake);
 
             // Act
-            var resultado = await _repository.GetAllAsync();
+            var result = await _repository.GetByIdAsync(1);
 
             // Assert
-            Assert.IsNotNull(resultado);
-            Assert.AreEqual(3, resultado.Count);
+            Assert.IsNotNull(result);
+            Assert.AreEqual(1, result.Id);
+        }
+
+        [TestMethod]
+        public async Task CreateAsync_DebeRetornarEntidadCreada()
+        {
+            // Arrange
+            var nuevaEntity = new ModelPrueba { Nombre = "Nuevo" };
+            var entityResult = new ModelPrueba { Id = 99, Nombre = "Nuevo" };
+
+            _mockDapper.Setup(d => d.QueryFirstAsync<ModelPrueba>(It.IsAny<string>(), It.IsAny<object>(), CommandType.Text))
+                       .ReturnsAsync(entityResult);
+
+            // Act
+            var result = await _repository.CreateAsync(nuevaEntity);
+
+            // Assert
+            Assert.AreEqual(99, result.Id);
+            _mockDapper.Verify(d => d.QueryFirstAsync<ModelPrueba>(It.IsAny<string>(), It.IsAny<object>(), CommandType.Text), Times.Once);
+        }
+
+        [TestMethod]
+        public async Task UpdateAsync_DebeRetornarTrue_SiSeActualiza()
+        {
+            // Arrange
+            _mockDapper.Setup(d => d.ExecuteAsync(It.IsAny<string>(), It.IsAny<object>(), CommandType.Text))
+                       .ReturnsAsync(1); // 1 fila afectada
+
+            // Act
+            var result = await _repository.UpdateAsync(new ModelPrueba { Id = 1 });
+
+            // Assert
+            Assert.IsTrue(result);
+        }
+
+        [TestMethod]
+        public async Task DeleteAsync_DebeRetornarTrue_SiSeElimina()
+        {
+            // Arrange
+            _mockDapper.Setup(d => d.ExecuteAsync(It.IsAny<string>(), It.IsAny<object>(), CommandType.Text))
+                       .ReturnsAsync(1);
+
+            // Act
+            var result = await _repository.DeleteAsync(1);
+
+            // Assert
+            Assert.IsTrue(result);
         }
     }
 }

@@ -1,6 +1,10 @@
+using System;                    
+using System.Collections.Generic; 
+using System.Linq;                
+using System.Threading.Tasks;
+using CreacionesAmpis.Application.DTOs;
 using CreacionesAmpis.Application.Interfaces;
 using CreacionesAmpis.Application.Services;
-using CreacionesAmpis.Domain;
 using CreacionesAmpis.Domain.Entities;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
@@ -27,21 +31,36 @@ namespace CreacionesAmpis.Tests
         public async Task CrearModeloPruebaExitoso_DebeRetornarTrue()
         {
             // Arrange
-            var modelo = new ModelPrueba
+            var dto = new CreateModelPruebaDTO
             {
-                Nombre = "Producto Test",
-                Descripcion = "Descripción Test",
-                Precio = 150.00m
+                Nombre = "Usuario Test",
+                Email = "test@example.com",
+                Contrasena = "123456",
+                Rol = "Cliente"
             };
 
-            _mockRepository.Setup(r => r.AddAsync(It.IsAny<ModelPrueba>()))
-                .Returns(Task.CompletedTask);
+            var modeloEsperado = new ModelPrueba
+            {
+                Id = 1,
+                Nombre = dto.Nombre,
+                Email = dto.Email,
+                Contrasena = dto.Contrasena,
+                Rol = dto.Rol,
+                Activo = true,
+                FechaCreacion = DateTime.UtcNow
+            };
+
+            _mockRepository.Setup(r => r.CreateAsync(It.IsAny<ModelPrueba>()))
+                .ReturnsAsync(modeloEsperado);
 
             // Act
-            await _servicePrueba.AddAsync(modelo);
+            var resultado = await _servicePrueba.CreateAsync(dto);
 
             // Assert
-            _mockRepository.Verify(r => r.AddAsync(It.IsAny<ModelPrueba>()), Times.Once);
+            Assert.IsNotNull(resultado);
+            Assert.AreEqual(1, resultado.Id);
+            Assert.AreEqual(dto.Nombre, resultado.Nombre);
+            _mockRepository.Verify(r => r.CreateAsync(It.IsAny<ModelPrueba>()), Times.Once);
         }
 
         /// <summary>
@@ -55,9 +74,12 @@ namespace CreacionesAmpis.Tests
             var modeloEsperado = new ModelPrueba
             {
                 Id = id,
-                Nombre = "Producto Existente",
-                Descripcion = "Descripción",
-                Precio = 200.00m
+                Nombre = "Usuario Existente",
+                Email = "existente@example.com",
+                Contrasena = "123456",
+                Rol = "Administrador",
+                Activo = true,
+                FechaCreacion = DateTime.UtcNow
             };
 
             _mockRepository.Setup(r => r.GetByIdAsync(id))
@@ -69,7 +91,7 @@ namespace CreacionesAmpis.Tests
             // Assert
             Assert.IsNotNull(resultado);
             Assert.AreEqual(id, resultado.Id);
-            Assert.AreEqual("Producto Existente", resultado.Nombre);
+            Assert.AreEqual("Usuario Existente", resultado.Nombre);
             _mockRepository.Verify(r => r.GetByIdAsync(id), Times.Once);
         }
 
@@ -82,8 +104,8 @@ namespace CreacionesAmpis.Tests
             // Arrange
             var modelos = new List<ModelPrueba>
             {
-                new ModelPrueba { Id = 1, Nombre = "Producto 1", Precio = 100m },
-                new ModelPrueba { Id = 2, Nombre = "Producto 2", Precio = 200m }
+                new ModelPrueba { Id = 1, Nombre = "Usuario 1", Email = "user1@example.com", Rol = "Cliente", Activo = true },
+                new ModelPrueba { Id = 2, Nombre = "Usuario 2", Email = "user2@example.com", Rol = "Administrador", Activo = true }
             };
 
             _mockRepository.Setup(r => r.GetAllAsync())
@@ -94,7 +116,7 @@ namespace CreacionesAmpis.Tests
 
             // Assert
             Assert.IsNotNull(resultado);
-            Assert.AreEqual(2, resultado.Count);
+            Assert.AreEqual(2, resultado.Count());
             _mockRepository.Verify(r => r.GetAllAsync(), Times.Once);
         }
 
@@ -105,21 +127,23 @@ namespace CreacionesAmpis.Tests
         public async Task ActualizarModeloPrueba_DebeActualizarExitosamente()
         {
             // Arrange
-            var modelo = new ModelPrueba
+            var id = 1;
+            var dto = new UpdateModelPruebaDTO
             {
-                Id = 1,
-                Nombre = "Producto Actualizado",
-                Descripcion = "Nueva descripción",
-                Precio = 250.00m
+                Nombre = "Usuario Actualizado",
+                Email = "actualizado@example.com",
+                Rol = "Vendedor",
+                Activo = true
             };
 
             _mockRepository.Setup(r => r.UpdateAsync(It.IsAny<ModelPrueba>()))
-                .Returns(Task.CompletedTask);
+                .ReturnsAsync(true);
 
             // Act
-            await _servicePrueba.UpdateAsync(modelo);
+            var resultado = await _servicePrueba.UpdateAsync(id, dto);
 
             // Assert
+            Assert.IsTrue(resultado);
             _mockRepository.Verify(r => r.UpdateAsync(It.IsAny<ModelPrueba>()), Times.Once);
         }
 
@@ -132,12 +156,13 @@ namespace CreacionesAmpis.Tests
             // Arrange
             var id = 1;
             _mockRepository.Setup(r => r.DeleteAsync(id))
-                .Returns(Task.CompletedTask);
+                .ReturnsAsync(true);
 
             // Act
-            await _servicePrueba.DeleteAsync(id);
+            var resultado = await _servicePrueba.DeleteAsync(id);
 
             // Assert
+            Assert.IsTrue(resultado);
             _mockRepository.Verify(r => r.DeleteAsync(id), Times.Once);
         }
     }
