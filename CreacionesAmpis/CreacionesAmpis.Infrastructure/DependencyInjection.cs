@@ -13,6 +13,8 @@ namespace CreacionesAmpis.Infrastructure
             services.AddScoped<IDapperCreacionesAmpis, DapperCreacionesAmpis>();
             services.AddScoped<IModelPruebaRepository, ModelPruebaRepository>();
             services.AddScoped<IServicePrueba, ServicePrueba>();
+            services.AddScoped<IAuthInterface, AuthService>();
+            services.AddScoped<IAuthRepository, AuthRepository>();
             return services;
         }
     }
