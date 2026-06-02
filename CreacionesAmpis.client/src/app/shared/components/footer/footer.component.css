@@ -1,0 +1,146 @@
+.footer {
+  background: #fdf0f3;
+  border-top: 1px solid #f0e0e5;
+  font-family: 'Lexend', sans-serif;
+}
+
+/* ── Main grid ── */
+.footer-main {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 56px 48px 40px;
+  display: grid;
+  grid-template-columns: 1.6fr 1fr 1.3fr 1fr;
+  gap: 40px;
+}
+
+/* ── Columna marca ── */
+.brand-name {
+  font-family: 'Yeseva One', serif;
+  font-size: 1.35rem;
+  font-weight: 400;
+  color: #1a1a2e;
+  display: block;
+  margin-bottom: 14px;
+}
+
+.brand-desc {
+  font-size: 0.825rem;
+  font-weight: 300;
+  color: #6b6b80;
+  line-height: 1.7;
+}
+
+/* ── Columnas generales ── */
+.col-title {
+  font-family: 'Lexend', sans-serif;
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: #1a1a2e;
+  margin-bottom: 18px;
+  letter-spacing: 0.01em;
+}
+
+.col-links {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.col-links a {
+  font-size: 0.825rem;
+  font-weight: 300;
+  color: #5a5a70;
+  text-decoration: none;
+  transition: color 0.2s;
+}
+
+.col-links a:hover {
+  color: #c4788b;
+}
+
+/* ── Contacto ── */
+.contact-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-bottom: 20px;
+}
+
+.contact-list li {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 0.825rem;
+  font-weight: 300;
+  color: #5a5a70;
+}
+
+.contact-list svg {
+  color: #c4788b;
+  flex-shrink: 0;
+}
+
+/* ── Redes sociales ── */
+.social-icons {
+  display: flex;
+  gap: 12px;
+}
+
+.social-icons a {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  border: 1.5px solid #e8d4d9;
+  color: #5a5a70;
+  text-decoration: none;
+  transition: color 0.2s, border-color 0.2s, background 0.2s;
+}
+
+.social-icons a:hover {
+  color: #c4788b;
+  border-color: #c4788b;
+  background: rgba(196, 120, 139, 0.06);
+}
+
+/* ── Barra inferior ── */
+.footer-bottom {
+  border-top: 1px solid #f0e0e5;
+  padding: 18px 48px;
+  text-align: center;
+}
+
+.footer-bottom p {
+  font-size: 0.775rem;
+  font-weight: 300;
+  color: #9a9aaf;
+}
+
+/* ── Responsive ── */
+@media (max-width: 900px) {
+  .footer-main {
+    grid-template-columns: 1fr 1fr;
+    gap: 32px;
+    padding: 40px 32px 28px;
+  }
+
+  .footer-brand {
+    grid-column: 1 / -1;
+  }
+}
+
+@media (max-width: 560px) {
+  .footer-main {
+    grid-template-columns: 1fr;
+    padding: 36px 24px 24px;
+  }
+
+  .footer-bottom {
+    padding: 16px 24px;
+  }
+}

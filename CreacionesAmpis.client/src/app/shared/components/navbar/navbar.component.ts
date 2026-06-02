@@ -1,5 +1,5 @@
 import { Component, HostListener, inject, signal } from '@angular/core';
-import { RouterLink, RouterLinkActive } from '@angular/router';
+import { Router, RouterLink, RouterLinkActive } from '@angular/router';
 import { AuthService } from '../../../core/services/auth.service';
 
 @Component({
@@ -11,6 +11,7 @@ import { AuthService } from '../../../core/services/auth.service';
 })
 export class NavbarComponent {
   auth = inject(AuthService);
+  private router = inject(Router);
   scrolled = signal(false);
   menuOpen = signal(false);
 
@@ -33,5 +34,6 @@ export class NavbarComponent {
   logout() {
     this.auth.logout();
     this.menuOpen.set(false);
+    this.router.navigate(['/ingresar']);
   }
 }
